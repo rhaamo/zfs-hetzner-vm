@@ -566,7 +566,7 @@ if [[ $v_swap_size -gt 0 ]]; then
 fi
 
 echo "======= setting up initial system packages =========="
-debootstrap --arch=amd64 focal "$c_zfs_mount_dir" "$c_deb_packages_repo"
+debootstrap --arch=amd64 jammy "$c_zfs_mount_dir" "$c_deb_packages_repo"
 
 zfs set devices=off "$v_rpool_name"
 
@@ -619,11 +619,11 @@ done
 
 echo "======= setting apt repos =========="
 cat > "$c_zfs_mount_dir/etc/apt/sources.list" <<CONF
-deb [arch=i386,amd64] $c_deb_packages_repo focal main restricted
-deb [arch=i386,amd64] $c_deb_packages_repo focal-updates main restricted
-deb [arch=i386,amd64] $c_deb_packages_repo focal-backports main restricted
-deb [arch=i386,amd64] $c_deb_packages_repo focal universe
-deb [arch=i386,amd64] $c_deb_security_repo focal-security main restricted
+deb [arch=i386,amd64] $c_deb_packages_repo jammy main restricted
+deb [arch=i386,amd64] $c_deb_packages_repo jammy-updates main restricted
+deb [arch=i386,amd64] $c_deb_packages_repo jammy-backports main restricted
+deb [arch=i386,amd64] $c_deb_packages_repo jammy universe
+deb [arch=i386,amd64] $c_deb_security_repo jammy-security main restricted
 CONF
 
 chroot_execute "apt update"
